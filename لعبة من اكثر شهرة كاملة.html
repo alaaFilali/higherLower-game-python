@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>لعبة من اكثر شهرة كاملة</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">لعبة من اكثر شهرة كاملة</h1>
+        <div class="content">
+            <p>
+                قبل ان تقرأ الحل تأكد ان قد اعطيت مشروع هذه الحصة حقه من الوقت 
+                والان سوف اريك كيف ساقوم ببرمجة هذه اللعبة وهذا لا يعني ان حلي 
+                هو الحل الوحيد او يجب ان تفعل مثلي لا يوجد حل واحد, مادام انه البرنامج 
+                الخاص بك يعمل ونتيجته النهائية مثل ما اريتك في البداية اذن هذا كافي 
+                وقد نجحت.
+            </p>
+            <p>
+                طلبت منك سابقا ان تقسم المشكل الكبير المعقد الى مشاكل صغيرة 
+                لكي تحلها واحدة تلو الاخرى وهذ العملية سوف تسهل عليك كثيرا 
+                برمجة اي مشروع في ظاهره يبدو معقد ومستحيل البرمجة الان هكذا قمت بتقسيم 
+                برنامج اليوم
+            </p>
+            <p>
+                اولا يجب ان اظهر لوغو البرنامج من 
+                art.py 
+                وعلي ايضا ان اختار شخصيتين من 
+                game_data 
+                لكي يتم المقارنة بينها ولكن تذكر ان هذه الشخصية سوف تكون 
+                عبارة عن قاموس بمفاتيح اذن على ان اخمن طريقة لكي اظهرها 
+                بشكل منظم وجميل
+                وعلي ايضا ان اسأل المستخدم ان يدخل الشخصية التي اختارها
+                والتحقق من ان كانت الاجابة صحيحة او لا واعلم اللاعب بنتيجة
+                الاختيار الذي اختاره وايضا على ان احفظ ال 
+                score 
+                لكي اظهره لللاعب في حال كانت اجاباته صحيحة وفي نهاية اللعبة ايضا 
+                وعلي ايضا ان اجعل اللعبة تكرر نفسها وكما قلت سابقا 
+                عندما تختار اجابة مثلا وكانت صحيحة ما اخترته سوف يذهب والاختيار الاخر سوف 
+                يبقى فلو كان في 
+                B 
+                سوف يصبح 
+                A
+                اذن علي التخمين في كيفية حل هذا المشكل واخيرا سوف امسح الشاشة في كل 
+                مرحلة من اللعبة لكي تكون نظيفة وواضحة لللاعب
+            </p>
+            <p>
+                الان لنبدأ في برمجة اللعبة: 
+            </p>
+            <p>
+                اولا سوف اقوم باظهار لوغو اللعبة
+            </p>
+            <pre><code>
+from art import logo
+
+print(logo)
+            </code></pre>
+            <p>
+                ثانيا سوف اقوم باختيار شخصيتين عشوائيتين من 
+                game_data.py 
+                وفيه متغير 
+                data 
+                وهو عبارة عن قائمة قواميس
+                باستخدام مكتبة العشوائية
+            </p>
+            <pre><code>
+from game_data import data
+import random
+
+acount_a = random.choice(data)
+acount_b = random.choice(data)
+if acount_a == acount_b:   
+    acount_b = random.choice(data)
+            </code></pre>
+            <p>
+                الان سوف اقوم بتنظيم المعلومات حتى اقوم باظهارها في اللعبة بطريقة جميلة
+            </p>
+            <pre><code>
+name = account_a["name"]
+description = account_a["description"]
+country = account+a["country"]
+print(f"{name}, a {description}, from {country}")
+            </code></pre>
+            <p>
+                ولكن لاحظ انني قمت بذلك مع الحساب الاول فقط ولكن يجب ان افعل ذلك 
+                مع حسابين اثنين اذن لتفادي تكرار الكود سوف اقوم بتحويلها الى دالة
+            </p>
+            <pre><code>
+def format_data(account):
+    """Format account into printable format: name, description and country"""
+    name = account["name"]
+    description = account["description"]
+    country = account["country"]
+    return f"{name}, a {description}, from {country}"
+            </code></pre>
+            <p>
+                الان سوف اقوم بمنادات الدالة وببساطة اقوم بتمرير الحساب 
+            </p>
+            <pre><code>
+print(f"Compare A: {format_data(acount_a)}.")
+print(f"Compare B: {format_data(acount_b)}.")
+            </code></pre>
+            <p>
+                ومن الجيد دائما تجريب الكود الخاص بك في كل مرة
+            </p>
+            <p>
+                الان سوف اضيف رسمة 
+                vs
+                بين الحسابين 
+            </p>
+            <pre><code>
+from art import logo, vs
+...
+
+print(f"Compare A: {format_data(acount_a)}.")
+print(vs)
+print(f"Against B: {format_data(acount_b)}.")
+            </code></pre>
+            <p>
+                الكود كاملا حتى الان: 
+            </p>
+            <pre><code>
+from art import logoو, vs
+from game_data import data
+import random
+
+
+def format_data(account):
+    """Format account into printable format: name, description and country"""
+    name = account["name"]
+    description = account["description"]
+    country = account["country"]
+    return f"{name}, a {description}, from {country}"
+
+
+print(logo)
+
+acount_a = random.choice(data)
+acount_b = random.choice(data)
+if acount_a == acount_b:   
+    acount_b = random.choice(data)
+
+print(f"Compare A: {format_data(acount_a)}.")
+print(vs)
+print(f"Against B: {format_data(acount_b)}.")
+            </code></pre>
+            <p>
+                الان سوف ننتقل للجزء التالي: 
+            </p>
+            <p>
+                سوف نسأل اللاعب ان يختار احدى الحسابين لنرى من لديه اكثر 
+                متابعين, ولاحظ انه يمكن ان يدخل حرف 
+                A 
+                كبير او حرف صغير 
+                a
+                لذلك استعملت دالة 
+                lower 
+                لكي اضمن اني اتعامل مع حرف صغير
+            </p>
+            <pre><code>
+guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+            </code></pre>
+            <p> 
+                الان سوف نتحقق ان كانت اجابة اللاعب صحيحة او لا ولكي نعرف ذلك 
+                علينا ان نعرف كم عدد المتابعين لكل حساب وتذكر انه العدد تحت 
+                المفتاح 
+                follower_count
+                في القاموس
+            </p>
+            <pre><code>
+a_follower_count = account_a["follower_count"]
+b_follower_count = account_b["follower_count"]
+            </code></pre>
+            <p>
+                والان سوف اتحقق ولكنني اظن انه من الافضل ان اجعلها في دالة
+            </p>
+            <pre><code>
+def check_answer(guess, a_followers, b_followers):
+    """Checks followers against user's guess 
+    and returns True if they got it right.
+    Or False if they got it wrong.""" 
+
+    if a_followers > b_followers:
+        return guess == "a"
+    else:
+        return guess == "b"
+            </code></pre>
+            <p>
+                ثم اقوم بمناداتها
+            </p>
+            <pre><code>
+guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+a_follower_count = account_a["follower_count"]
+b_follower_count = account_b["follower_count"]
+is_correct = check_answer(guess, a_follower_count, b_follower_count)
+            </code></pre>
+            <p>
+                الان بناءا على تلك النتيجة سوف نظهر رسالة مختلفة
+            </p>
+            <pre><code>
+if is_correct:
+    print(f"You're right!.")
+else:
+    print(f"Sorry, that's wrong.)
+            </code></pre>
+            <p>
+                بالاضافة الى نتيجة الكود علينا ان نتبع ال 
+                score 
+                وهو في بداية اللعبة يكون 
+                0
+                واذا كانت الاجابة صحيحة سوف نضيف 
+                1
+                الى 
+                ال 
+                score
+            </p>
+            <pre><code>
+score = 0
+...
+
+if is_correct:
+    score += 1
+    print(f"You're right! Current score: {score}.")
+else:
+    print(f"Sorry, that's wrong. Final score: {score}")
+            </code></pre>
+            <p>
+                الان وقت رائع لتجريب اللعبة كما هي 
+            </p>
+            <p>
+                الان علينا ان نجعل اللعبة الخاصة بنا تكرر نفسها لانها في هذه اللحظة
+                نقارن بين حسابين ثم ينتهي البرنامج مهما كانت النتيجة اذن علينا 
+                ان نستعمل حلقة 
+                while 
+                ربما ولكن اي جزء من اللعبة الخاصة بنا يجب ان يتكرر؟ 
+            </p>
+            <pre><code>
+print(logo)
+score = 0
+game_should_continue = True
+
+while game_should_continue:
+
+    acount_a = random.choice(data)
+    acount_b = random.choice(data)
+    if acount_a == acount_b:   
+        acount_b = random.choice(data)
+
+    print(f"Compare A: {format_data(account_a)}.")
+    print(vs)
+    print(f"Against B: {format_data(account_b)}.")
+
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+    if is_correct:
+        score += 1
+        print(f"You're right! Current score: {score}.")
+    else:
+        game_should_continue = False
+        print(f"Sorry, that's wrong. Final score: {score}")
+            </code></pre>
+            <p>
+                وسوف نقلب قيمة العلم 
+                game_should_continue 
+                عندما يكون اختيار اللاعب خطأ
+            </p>
+            <p>
+                الان نريد ان نجعل الحساب 
+                B 
+                يصبح الحساب 
+                A 
+                في الجولة التالية
+                ان كانت الاجابة صحيحة ولفعل ذلك كحل هو ان نقوم بتوليد 
+                حساب 
+                B 
+                خارج الحلقة وداخل الحلقة نجعل الحساب 
+                A 
+                هو الحساب 
+                B 
+                ثم نولد حساب جديد في 
+                B 
+                وهكذا نضمن ما نريد فعله لان الجزء خارج الحلقة لن يتكرر
+            </p>
+            <pre><code>
+print(logo)
+score = 0
+game_should_continue = True
+acount_b = random.choice(data)
+
+while game_should_continue:
+
+    acount_a = acount_b
+    acount_b = random.choice(data)
+    while acount_a == acount_b:   
+        acount_b = random.choice(data)
+
+    print(f"Compare A: {format_data(account_a)}.")
+    print(vs)
+    print(f"Against B: {format_data(account_b)}.")
+
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+    if is_correct:
+        score += 1
+        print(f"You're right! Current score: {score}.")
+    else:
+        game_should_continue = False
+        print(f"Sorry, that's wrong. Final score: {score}")
+            </code></pre>
+            <p>
+                لاحظ ايضا انني غيرت 
+                if 
+                الى 
+                while 
+                في حال كان الحساب الاول هو نفس الحساب الثاني حتى في المرة الثانية
+                والثالثة اي بهذا نضمن الاختلاف بين الحسابين مئة بالمئة
+            </p>
+            <p>
+                الان نريد ان نمسح الشاشة بين الجولات وسوف ننادي الدالة قبل ان 
+                نظهر نتيجة الجولة نقوم بطباعة اللوغو مرة اخرى لاننا نريد اظهاره
+                في كل جولة ايضا
+            </p>
+            <pre><code>
+from replit import clear
+...
+while game_should_continue:
+    ...
+
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+    clear()
+    print(logo)
+
+    if is_correct:
+        score += 1
+        print(f"You're right! Current score: {score}.")
+    else:
+        game_should_continue = False
+        print(f"Sorry, that's wrong. Final score: {score}")
+            </code></pre>
+            <p>
+                الكود كاملا:
+            </p>
+            <pre><code>
+from game_data import data
+import random
+from art import logo, vs
+from replit import clear
+
+
+def format_data(account):
+    """Format account into printable format: name, description and country"""
+    name = account["name"]
+    description = account["description"]
+    country = account["country"]
+    # print(f'{name}: {account["follower_count"]}')
+    return f"{name}, a {description}, from {country}"
+
+
+def check_answer(guess, a_followers, b_followers):
+    """Checks followers against user's guess 
+    and returns True if they got it right.
+    Or False if they got it wrong.""" 
+    if a_followers > b_followers:
+        return guess == "a"
+    else:
+        return guess == "b"
+
+
+print(logo)
+score = 0
+game_should_continue = True
+account_b = random.choice(data)
+
+while game_should_continue:
+    account_a = account_b
+    account_b = random.choice(data)
+
+    while account_a == account_b:
+        account_b = random.choice(data)
+
+    print(f"Compare A: {format_data(account_a)}.")
+    print(vs)
+    print(f"Against B: {format_data(account_b)}.")
+
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+    clear()
+    print(logo)
+    if is_correct:
+        score += 1
+        print(f"You're right! Current score: {score}.")
+    else:
+        game_should_continue = False
+        print(f"Sorry, that's wrong. Final score: {score}")
+            </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>
